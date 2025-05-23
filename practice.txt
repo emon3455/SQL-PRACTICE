@@ -1,0 +1,82 @@
+## 📦 **Step 1: Create Tables**
+
+```sql
+-- Members Table
+CREATE TABLE members (
+    member_id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    join_date DATE
+);
+
+-- Books Table
+CREATE TABLE books (
+    book_id SERIAL PRIMARY KEY,
+    title VARCHAR(150),
+    author VARCHAR(100),
+    genre VARCHAR(50),
+    available BOOLEAN
+);
+
+-- Borrow Table (Records which member borrowed which book and when)
+CREATE TABLE borrow (
+    borrow_id SERIAL PRIMARY KEY,
+    member_id INT REFERENCES members(member_id),
+    book_id INT REFERENCES books(book_id),
+    borrow_date DATE,
+    return_date DATE
+);
+```
+
+---
+
+## 📋 **Step 2: Sample Data**
+
+```sql
+-- Members
+INSERT INTO members (name, email, join_date) VALUES
+('Alice Watson', 'alice@library.com', '2022-01-10'),
+('Bob Lee', 'bob@library.com', '2022-02-05'),
+('Clara Oswald', 'clara@library.com', '2022-03-12'),
+('David Tennant', 'david@library.com', '2021-12-25');
+
+-- Books
+INSERT INTO books (title, author, genre, available) VALUES
+('1984', 'George Orwell', 'Dystopian', TRUE),
+('To Kill a Mockingbird', 'Harper Lee', 'Fiction', TRUE),
+('A Brief History of Time', 'Stephen Hawking', 'Science', FALSE),
+('The Hobbit', 'J.R.R. Tolkien', 'Fantasy', TRUE),
+('The Catcher in the Rye', 'J.D. Salinger', 'Fiction', FALSE);
+
+-- Borrow Records
+INSERT INTO borrow (member_id, book_id, borrow_date, return_date) VALUES
+(1, 3, '2022-04-01', NULL),
+(2, 5, '2022-03-15', '2022-04-10'),
+(3, 4, '2022-04-05', NULL),
+(1, 2, '2022-01-15', '2022-01-30'),
+(4, 1, '2022-02-20', '2022-03-01');
+```
+
+---
+
+## 🧠 **Step 3: 15 Practice SQL Questions**
+
+1. 📚 List all available books.
+2. 🧑‍💻 Get the names of members who joined in 2022.
+3. 📅 Show all borrow records where the book **has not been returned yet**.
+4. 🔁 Find the total number of times each book was borrowed.
+5. 👤 Find which members borrowed **‘The Hobbit’**.
+6. 📚 Get the most borrowed book.
+7. 📆 List members who borrowed books in **April 2022**.
+8. 💰 Count how many books are currently borrowed (i.e., not returned).
+9. 📖 Show the book title, member name, and borrow date (JOIN all three tables).
+10. 📦 Find books that were **never borrowed**.
+11. 📈 Get the total number of books per genre.
+12. 🔍 List members who borrowed more than 1 book.
+13. 🏆 Which member borrowed the **most books**?
+14. ⏳ Find average borrow duration for returned books.
+15. 🚫 Find books that are currently not available.
+
+---
+
+Let me know if you want me to solve any (or all) of these, or if you want to build another themed dataset — like e-commerce, gym, hospital, or school 🎯
